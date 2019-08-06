@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Super heroes 슈퍼 히어로</title>
+
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        h1{
+            background: rgb(250, 8, 3);
+            color: rgb(47, 205, 253);
+            text-align: center;
+            padding: 0.7em 0em;
+        }
+
+        p{
+            text-align: center;
+        }
+
+        .alcentro{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+        }
+
+        #resultado{
+            background: rgb(247, 219, 239);
+            border: 1px solid rgb(9, 235, 223);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+         <h1>Super heroes 슈퍼 히어로</h1>
+
+         <form action="#">
+              
+
+         <div class="form-group">
+             <label for="super heroes">Digita un codigo para un super heroe </label>
+             <input type="text" class="form-control" id="super heroes"  placeholder="Digite un codigo entre 1 y 731">
+             <small class="form-text text-muted">Busca tu favorito</small>
+         </div>
+                <p>
+                 
+                    <button type="submit" class="btn btn-danger"  id="bt_enviar">Buscar</button>
+                </p>
+                
+       
+            </form>
+       
+            <div id="resultado">
+       
+       
+            </div>
+            
+    </div>
+    
+
+    <script>
+
+        const brenviar = document.getElementById("bt_enviar");
+        const divres = document.getElementById("resultado");
+
+        brenviar.addEventListener("click", prueba);
+
+        function prueba(e){
+            e.preventDefault();
+
+            console.log(document.getElementById('super heroes').value);
+
+            fetch("https://www.superheroapi.com/api.php/645665809279716/"+document.getElementById('super heroes').value)
+                .then( function(response){
+                    return  response.json();
+                  
+                }).then(function(data){
+                    console.log(data);
+
+                    var res = '';
+            
+                    divrespu.innerHTML= "<p>Nombre: "+ data.name +"</p><p>Ocupación: "+ data.work.occupation +"</p><p>Genero: "+ data.appearance.gender +"</p><p>Raza: "+ data.appearance.race +"</p><img src='"+ data.image.url +"' width='400px' height='350px' class='alcentro'></img>";
+
+                }).catch(function(error){
+
+                    alert("Lo sentimos el código ingresado no existe-입력하신 코드가 존재하지 않아 죄송합니다  ");
+                    
+                });
+
+                
+            
+        }
+
+        
+    
+    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
